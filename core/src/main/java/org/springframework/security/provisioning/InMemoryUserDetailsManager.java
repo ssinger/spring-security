@@ -142,7 +142,7 @@ public class InMemoryUserDetailsManager implements UserDetailsManager,
 
 	@Override
 	public UserDetails updatePassword(UserDetails user, String newPassword) {
-		String username = user.getUsername();
+		String username = user.getUsername().toLowerCase();
 		MutableUserDetails mutableUser = this.users.get(username);
 		mutableUser.setPassword(newPassword);
 		return mutableUser;
