@@ -37,4 +37,15 @@ public class InMemoryUserDetailsManagerTests {
 		this.manager.updatePassword(this.user, newPassword);
 		assertThat(this.manager.loadUserByUsername(this.user.getUsername()).getPassword()).isEqualTo(newPassword);
 	}
+	@Test
+	public void changePasswordMixedCase() {
+		String newPassword = "newPassword";
+		UserDetails testUser = PasswordEncodedUser.withUsername("TestUser")
+			.password("password")
+			.roles("USER")
+			.build();
+		this.manager.createUser(testUser);
+		this.manager.updatePassword(testUser, newPassword);
+		assertThat(this.manager.loadUserByUsername(testUser.getUsername()).getPassword()).isEqualTo(newPassword);
+	}
 }
